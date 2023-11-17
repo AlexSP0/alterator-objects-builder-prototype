@@ -2,7 +2,7 @@
 
 #include "object.h"
 
-namespace objectbuilder
+namespace ao_builder
 {
 void Object::setLocale(QString locale)
 {

@@ -1,6 +1,6 @@
 #include "basicobject.h"
 
-namespace objectbuilder
+namespace ao_builder
 {
 BasicObject::BasicObject()
     : Object()

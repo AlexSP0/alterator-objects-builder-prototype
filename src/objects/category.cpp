@@ -2,7 +2,7 @@
 
 #include "category.h"
 
-namespace objectbuilder
+namespace ao_builder
 {
 Category::Category()
     : Object()

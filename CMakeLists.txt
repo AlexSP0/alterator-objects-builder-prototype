@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 
-project(model-prototype VERSION 0.1 LANGUAGES CXX)
+project(alterator-objects-builder VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -32,6 +32,14 @@ endif()
 
 find_package(Qt5 COMPONENTS Widgets Core Gui LinguistTools REQUIRED)
 
+include(CheckCXXCompilerFlag)
+
+if(UNIX)
+  include(GNUInstallDirs)
+else()
+    message(FATAL_ERROR "System not Linux")
+endif()
+
 add_subdirectory(src)
 
 set(PROJECT_SOURCES
@@ -41,7 +49,7 @@ set(PROJECT_SOURCES
         mainwindow.ui
 )
 
-add_executable (model-prototype ${PROJECT_SOURCES})
-target_link_libraries(model-prototype Qt5::Widgets)
+add_executable (alterator-objects-builder ${PROJECT_SOURCES})
+target_link_libraries(alterator-objects-builder Qt5::Widgets)
 
 

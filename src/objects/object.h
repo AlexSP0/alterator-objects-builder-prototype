@@ -1,10 +1,10 @@
-#ifndef AB_OBJECT_H
-#define AB_OBJECT_H
+#ifndef AOB_OBJECT_H
+#define AOB_OBJECT_H
 
 #include <QMap>
 #include <QString>
 
-namespace objectbuilder
+namespace ao_builder
 {
 class Object
 {
@@ -24,4 +24,4 @@ public:
 };
 } // namespace objectbuilder
 
-#endif // AB_OBJECT_H
+#endif // AOB_OBJECT_H

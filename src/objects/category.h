@@ -1,11 +1,11 @@
-#ifndef AB_CATEGORY_H
+#ifndef AOB_CATEGORY_H
 #define AB_CATEGORY_H
 
 #include <QMap>
 
 #include "object.h"
 
-namespace objectbuilder
+namespace ao_builder
 {
 class Category : public Object
 {

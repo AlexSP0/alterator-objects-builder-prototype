@@ -2,7 +2,7 @@
 #define AB_CONSTANTS_H
 
 #include <QString>
-namespace objectbuilder
+namespace ao_builder
 {
 //Service name
 const char *const DBUS_SERVICE_NAME = "ru.basealt.alterator";

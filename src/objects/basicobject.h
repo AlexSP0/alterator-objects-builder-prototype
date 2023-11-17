@@ -1,11 +1,11 @@
-#ifndef AB_BASICOBJECT_H
-#define AB_BASICOBJECT_H
+#ifndef AOB_BASIC_OBJECT_H
+#define AOB_BASIC_OBJECT_H
 
 #include <QString>
 
 #include "object.h"
 
-namespace objectbuilder
+namespace ao_builder
 {
 class BasicObject : public Object
 {
@@ -23,4 +23,4 @@ public:
 
 } // namespace objectbuilder
 
-#endif // BASICOBJECT_H
+#endif // AOB_BASIC_OBJECT_H

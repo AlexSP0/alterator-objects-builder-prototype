@@ -20,6 +20,9 @@ set(HEADERS
     objects/basicobject.h
     objects/category.h
     objects/localappobject.h
+
+    aobuilderinterface.h
+    aobuilderimpl.h
 )
 
 set(SOURCES
@@ -27,6 +30,8 @@ set(SOURCES
     objects/basicobject.cpp
     objects/category.cpp
     objects/localappobject.cpp
+
+    aobuilderimpl.cpp
 )
 
 add_library(dbus-object-builder ${HEADERS}  ${SOURCES})

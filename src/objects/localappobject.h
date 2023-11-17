@@ -1,5 +1,5 @@
-#ifndef AB_LOCAL_APPLICATION_H
-#define AB_LOCAL_APPLICATION_H
+#ifndef AOB_LOCAL_APPLICATION_H
+#define AOB_LOCAL_APPLICATION_H
 
 #include <vector>
 #include <QMap>
@@ -7,7 +7,7 @@
 
 #include "basicobject.h"
 
-namespace objectbuilder
+namespace ao_builder
 {
 class LocalAppObject : public BasicObject
 {
@@ -35,4 +35,4 @@ public:
 };
 } // namespace objectbuilder
 
-#endif // AB_LOCAL_APPLICATION_H
+#endif // AOB_LOCAL_APPLICATION_H

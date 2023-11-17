@@ -1,6 +1,6 @@
 #include "localappobject.h"
 
-namespace objectbuilder
+namespace ao_builder
 {
 LocalAppObject::LocalAppObject()
     : BasicObject()
