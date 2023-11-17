@@ -4,6 +4,7 @@
 #include <QMap>
 #include <QMultiMap>
 #include <QString>
+#include <QVariant>
 
 namespace ao_builder
 {
@@ -28,3 +29,5 @@ public:
 };
 
 } // namespace ao_builder
+
+#endif

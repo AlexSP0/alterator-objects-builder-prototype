@@ -27,6 +27,7 @@ set(HEADERS
     objects/localappobject.h
 
     parsers/objectparserinterface.h
+    parsers/baseobjectparser.h
 
     aobuilderinterface.h
     aobuilderimpl.h
@@ -39,6 +40,8 @@ set(SOURCES
     objects/localappobject.cpp
 
     datasource/datasourcedbusimpl.cpp
+
+    parsers/baseobjectparser.cpp
 
     aobuilderimpl.cpp
 )
