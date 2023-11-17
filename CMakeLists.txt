@@ -30,9 +30,9 @@ if (CMAKE_COMPILER_IS_GNUCXX AND NOT WIN32)
   endif()
 endif()
 
-find_package(Qt5 COMPONENTS Widgets REQUIRED)
+find_package(Qt5 COMPONENTS Widgets Core Gui LinguistTools REQUIRED)
 
-add_subdirectory(model)
+add_subdirectory(src)
 
 set(PROJECT_SOURCES
         main.cpp
