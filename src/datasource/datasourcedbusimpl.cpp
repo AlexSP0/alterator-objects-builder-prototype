@@ -1,4 +1,5 @@
 #include "datasourcedbusimpl.h"
+#include "constants.h"
 
 #include <QDBusConnection>
 #include <QDBusInterface>
@@ -27,14 +28,45 @@ DataSourceDbusImpl::~DataSourceDbusImpl()
     delete d;
 }
 
-QStringList DataSourceDbusImpl::getPathByInterface(QString iface)
+QStringList DataSourceDbusImpl::getPathByInterface(QString ifaceName)
 {
-    return QStringList{};
+    QDBusInterface iface(d->m_serviceName,
+                         DBUS_ALTERATOR_MANAGER_PATH,
+                         DBUS_MANAGER_INTERFACE_NAME,
+                         d->m_dbusConnection);
+
+    if (!iface.isValid())
+    {
+        return QStringList{};
+    }
+
+    QDBusReply<QStringList> reply = iface.call(DBUS_GET_OBJECTS_METHOD_NAME, ifaceName);
+
+    if (!reply.isValid())
+    {
+        return QStringList{};
+    }
+
+    return reply.value();
 }
 
-QByteArray DataSourceDbusImpl::getObjectInfo(QString iface, QString path, QString method)
+QByteArray DataSourceDbusImpl::getObjectInfo(QString ifaceName, QString path, QString methodName)
 {
-    return QByteArray{};
+    QDBusInterface iface(d->m_serviceName, path, ifaceName, d->m_dbusConnection);
+
+    if (!iface.isValid())
+    {
+        return QByteArray{};
+    }
+
+    QDBusReply<QByteArray> reply = iface.call(methodName);
+
+    if (!reply.isValid())
+    {
+        return QByteArray{};
+    }
+
+    return reply.value();
 }
 
 } // namespace ao_builder

@@ -15,6 +15,10 @@ public:
     DataSourceDbusImpl(QString serviceName);
     ~DataSourceDbusImpl();
 
+public:
+    QStringList getPathByInterface(QString ifaceName);
+    QByteArray getObjectInfo(QString ifaceName, QString path, QString methodName);
+
 private:
     DataSourseDbusImplPrivate *d;
 
@@ -23,11 +27,6 @@ private:
     DataSourceDbusImpl(DataSourceDbusImpl &&)      = delete;
     DataSourceDbusImpl &operator=(const DataSourceDbusImpl &) = delete;
     DataSourceDbusImpl &operator=(DataSourceDbusImpl &&) = delete;
-
-    // DataSourceInterface interface
-public:
-    QStringList getPathByInterface(QString iface);
-    QByteArray getObjectInfo(QString iface, QString path, QString method);
 };
 
 } // namespace ao_builder
