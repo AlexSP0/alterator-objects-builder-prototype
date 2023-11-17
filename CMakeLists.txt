@@ -30,7 +30,7 @@ if (CMAKE_COMPILER_IS_GNUCXX AND NOT WIN32)
   endif()
 endif()
 
-find_package(Qt5 COMPONENTS Widgets Core Gui LinguistTools REQUIRED)
+find_package(Qt5 COMPONENTS Widgets Core DBus Gui LinguistTools REQUIRED)
 
 include(CheckCXXCompilerFlag)
 

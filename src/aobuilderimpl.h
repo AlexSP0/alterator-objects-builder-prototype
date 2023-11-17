@@ -1,5 +1,5 @@
-#ifndef AOBUILDERIMPL_H
-#define AOBUILDERIMPL_H
+#ifndef AOB_BUILDER_IMPL_H
+#define AOB_BUILDER_IMPL_H
 
 #include "aobuilderinterface.h"
 
@@ -27,4 +27,4 @@ public:
 
 } // namespace ao_builder
 
-#endif // AOBUILDERIMPL_H
+#endif // AOB_BUILDER_IMPL_H

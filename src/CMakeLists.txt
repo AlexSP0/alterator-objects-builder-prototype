@@ -11,7 +11,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt5 COMPONENTS Core Widgets REQUIRED)
+find_package(Qt5 COMPONENTS Core DBus Widgets REQUIRED)
 
 set(HEADERS
     constants.h
@@ -20,6 +20,9 @@ set(HEADERS
     objects/basicobject.h
     objects/category.h
     objects/localappobject.h
+
+    datasource/datasourceinterface.h
+    datasource/datasourcedbusimpl.h
 
     aobuilderinterface.h
     aobuilderimpl.h
@@ -31,8 +34,10 @@ set(SOURCES
     objects/category.cpp
     objects/localappobject.cpp
 
+    datasource/datasourcedbusimpl.cpp
+
     aobuilderimpl.cpp
 )
 
 add_library(dbus-object-builder ${HEADERS}  ${SOURCES})
-target_link_libraries(dbus-object-builder                Qt5::Widgets Qt5::Core)
+target_link_libraries(dbus-object-builder Qt5::DBus Qt5::Widgets Qt5::Core )
