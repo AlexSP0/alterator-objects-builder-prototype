@@ -16,13 +16,17 @@ find_package(Qt5 COMPONENTS Core DBus Widgets REQUIRED)
 set(HEADERS
     constants.h
 
+    builders/objectbulderinterface.h
+
+    datasource/datasourceinterface.h
+    datasource/datasourcedbusimpl.h
+
     objects/object.h
     objects/basicobject.h
     objects/category.h
     objects/localappobject.h
 
-    datasource/datasourceinterface.h
-    datasource/datasourcedbusimpl.h
+    parsers/objectparserinterface.h
 
     aobuilderinterface.h
     aobuilderimpl.h
