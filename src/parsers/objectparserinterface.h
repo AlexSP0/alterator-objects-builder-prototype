@@ -24,8 +24,14 @@ public:
 public:
     virtual ~ObjectParserInterface() = default;
 
-public:
+    virtual bool parse(QString data) = 0;
+
     virtual Sections getSections() = 0;
+
+    virtual QString getKeyLocale(QString keyName)                 = 0;
+    virtual QString getKeyNameWithoutLocale(QString keyName)      = 0;
+    virtual QString getDefaultValue(QList<IniFileKey> iniFileKey) = 0;
+    virtual QString getValue(QString section, QString key)        = 0;
 };
 
 } // namespace ao_builder

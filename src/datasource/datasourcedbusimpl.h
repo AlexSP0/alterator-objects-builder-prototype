@@ -9,24 +9,32 @@ namespace ao_builder
 {
 class DataSourseDbusImplPrivate;
 
-class DataSourceDbusImpl : public DataSourceInterface
+class DataSourceDBusImpl : public DataSourceInterface
 {
 public:
-    DataSourceDbusImpl(QString serviceName);
-    ~DataSourceDbusImpl();
+    DataSourceDBusImpl(QString serviceName);
+    ~DataSourceDBusImpl();
 
 public:
-    QStringList getPathByInterface(QString ifaceName);
-    QByteArray getObjectInfo(QString ifaceName, QString path, QString methodName);
+    QStringList getLocalAppPaths() override;
+    QStringList getCategoriesList() override;
+    QStringList getLegacyObjectsPaths() override;
+    QStringList getObjectsPath() override;
+
+    QByteArray getObjectInfo(QString ifaceName, QString path, QString methodName) override;
+
+private:
+    QStringList getPathsByInterface(QString ifaceName);
+    QStringList getObjectsList(QString listMethodName, QString path, QString interfaceName);
 
 private:
     DataSourseDbusImplPrivate *d;
 
 private:
-    DataSourceDbusImpl(const DataSourceDbusImpl &) = delete;
-    DataSourceDbusImpl(DataSourceDbusImpl &&)      = delete;
-    DataSourceDbusImpl &operator=(const DataSourceDbusImpl &) = delete;
-    DataSourceDbusImpl &operator=(DataSourceDbusImpl &&) = delete;
+    DataSourceDBusImpl(const DataSourceDBusImpl &) = delete;
+    DataSourceDBusImpl(DataSourceDBusImpl &&)      = delete;
+    DataSourceDBusImpl &operator=(const DataSourceDBusImpl &) = delete;
+    DataSourceDBusImpl &operator=(DataSourceDBusImpl &&) = delete;
 };
 
 } // namespace ao_builder

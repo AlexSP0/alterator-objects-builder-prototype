@@ -13,8 +13,11 @@ class DataSourceInterface
 public:
     virtual ~DataSourceInterface() = default;
 
-public:
-    virtual QStringList getPathByInterface(QString iface)                         = 0;
+    virtual QStringList getLocalAppPaths()      = 0;
+    virtual QStringList getCategoriesList()     = 0;
+    virtual QStringList getLegacyObjectsPaths() = 0;
+    virtual QStringList getObjectsPath()        = 0;
+
     virtual QByteArray getObjectInfo(QString iface, QString path, QString method) = 0;
 };
 

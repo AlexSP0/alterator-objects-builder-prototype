@@ -7,9 +7,15 @@
 
 namespace ao_builder
 {
-BaseObjectParser::BaseObjectParser(QString data)
-    : m_sections{}
+ObjectParserInterface::Sections BaseObjectParser::getSections()
 {
+    return m_sections;
+}
+
+bool BaseObjectParser::parse(QString data)
+{
+    m_sections.clear();
+
     std::istringstream iStream(data.toStdString());
 
     try
@@ -29,16 +35,12 @@ BaseObjectParser::BaseObjectParser(QString data)
                                                   QVariant(key.second.get_value("").c_str())});
             }
         }
+        return true;
     }
     catch (std::exception &e)
     {
-        //Log error
+        return false;
     }
-}
-
-ObjectParserInterface::Sections BaseObjectParser::getSections()
-{
-    return m_sections;
 }
 
 QString BaseObjectParser::getKeyLocale(QString keyName)
@@ -65,6 +67,45 @@ QString BaseObjectParser::getKeyNameWithoutLocale(QString keyName)
     }
 
     return keyName.mid(0, indexOfOpeningBracket).toLower();
+}
+
+QString BaseObjectParser::getDefaultValue(QList<IniFileKey> iniFileKey)
+{
+    for (IniFileKey &currentIniFileKey : iniFileKey)
+    {
+        if (currentIniFileKey.keyLocale.isEmpty())
+        {
+            return currentIniFileKey.value.toString();
+        }
+    }
+
+    return {};
+}
+
+QString BaseObjectParser::getValue(QString section, QString key)
+{
+    auto sectionIt = m_sections.find(section);
+
+    if (sectionIt == m_sections.end())
+    {
+        return {};
+    }
+
+    auto it = (*sectionIt).find(key);
+
+    if (it == (*sectionIt).end())
+    {
+        return {};
+    }
+
+    QList<IniFileKey> listOfKeys = (*sectionIt).values(key);
+
+    if (!listOfKeys.empty())
+    {
+        return listOfKeys.at(0).value.toString();
+    }
+
+    return {};
 }
 
 } // namespace ao_builder

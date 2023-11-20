@@ -17,6 +17,8 @@ set(HEADERS
     constants.h
 
     builders/objectbulderinterface.h
+    builders/objectbuilderfactory.h
+    builders/localapplicationobjectbuilder.h
 
     datasource/datasourceinterface.h
     datasource/datasourcedbusimpl.h
@@ -34,12 +36,15 @@ set(HEADERS
 )
 
 set(SOURCES
+    builders/objectbuilderfactory.cpp
+    builders/localapplicationobjectbuilder.cpp
+
+    datasource/datasourcedbusimpl.cpp
+
     objects/object.cpp
     objects/basicobject.cpp
     objects/category.cpp
     objects/localappobject.cpp
-
-    datasource/datasourcedbusimpl.cpp
 
     parsers/baseobjectparser.cpp
 

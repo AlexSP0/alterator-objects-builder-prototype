@@ -50,6 +50,6 @@ set(PROJECT_SOURCES
 )
 
 add_executable (alterator-objects-builder ${PROJECT_SOURCES})
-target_link_libraries(alterator-objects-builder Qt5::Widgets)
+target_link_libraries(alterator-objects-builder Qt5::Widgets dbus-object-builder)
 
 

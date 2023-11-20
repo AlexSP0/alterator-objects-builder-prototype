@@ -5,24 +5,31 @@
 
 namespace ao_builder
 {
-class AOBuilderImpl : public AOBuilderInterface
+class AOBuilderImplPrivate;
+
+class AOBuilderImpl final : public AOBuilderInterface
 {
 public:
     AOBuilderImpl();
+    ~AOBuilderImpl();
 
     // AOBuilderInterface interface
 public:
-    QStringList getLegacyObjectsPaths();
-    std::unique_ptr<Object> buildLegacyObject(QString path);
+    QStringList getLegacyObjectsPaths() override;
+    QStringList getLocalAppsPaths() override;
+    QStringList getCategoriesList() override;
+    QStringList getObjectsPaths() override;
 
-    QStringList getLocalAppsPaths();
-    std::unique_ptr<Object> buildLocalAppObject(QString path);
+    std::unique_ptr<Object> buildObject(QString path, QString interface) override;
 
-    QStringList getCategoriesList();
-    std::unique_ptr<Object> buildCategoryObject(QString path);
+private:
+    AOBuilderImplPrivate *d;
 
-    QStringList getObjectsPaths();
-    std::unique_ptr<Object> buildObject(QString path);
+private:
+    AOBuilderImpl(const AOBuilderImpl &) = delete;
+    AOBuilderImpl(AOBuilderImpl &&)      = delete;
+    AOBuilderImpl &operator=(const AOBuilderImpl &) = delete;
+    AOBuilderImpl &operator=(AOBuilderImpl &&) = delete;
 };
 
 } // namespace ao_builder

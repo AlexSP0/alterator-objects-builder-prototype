@@ -19,16 +19,66 @@ public:
     QDBusConnection m_dbusConnection;
 };
 
-DataSourceDbusImpl::DataSourceDbusImpl(QString serviceName)
+DataSourceDBusImpl::DataSourceDBusImpl(QString serviceName)
     : d(new DataSourseDbusImplPrivate(serviceName))
 {}
 
-DataSourceDbusImpl::~DataSourceDbusImpl()
+DataSourceDBusImpl::~DataSourceDBusImpl()
 {
     delete d;
 }
 
-QStringList DataSourceDbusImpl::getPathByInterface(QString ifaceName)
+QStringList DataSourceDBusImpl::getLocalAppPaths()
+{
+    QStringList mainAppObjectList = getPathsByInterface(DBUS_LOCAL_APP_OBJECT_INTERFACE_NAME);
+
+    if (mainAppObjectList.empty())
+    {
+        return {};
+    }
+
+    QString mainObjectPath = mainAppObjectList.at(0);
+
+    QStringList localAppList = getObjectsList(DBUS_OBJECT_METHOD_LIST_DEFAULT_NAME,
+                                              mainObjectPath,
+                                              DBUS_LOCAL_APP_OBJECT_INTERFACE_NAME);
+
+    return localAppList;
+}
+
+QStringList DataSourceDBusImpl::getCategoriesList()
+{
+    QStringList mainCatObjectList = getPathsByInterface(DBUS_CATEGORY_OBJECT_INTERFACE_NAME);
+
+    if (mainCatObjectList.empty())
+    {
+        return {};
+    }
+
+    QString mainCatObjectPath = mainCatObjectList.at(0);
+
+    QStringList localCatList = getObjectsList(DBUS_OBJECT_METHOD_LIST_DEFAULT_NAME,
+                                              mainCatObjectPath,
+                                              DBUS_CATEGORY_OBJECT_INTERFACE_NAME);
+
+    return localCatList;
+}
+
+QStringList DataSourceDBusImpl::getLegacyObjectsPaths()
+{
+    QStringList legacyObjectList = getPathsByInterface(DBUS_LEGACY_OBJECT_INTERFACE_NAME);
+
+    return legacyObjectList;
+}
+
+QStringList DataSourceDBusImpl::getObjectsPath()
+{
+    QStringList objectList = getPathsByInterface(DBUS_OBJECT_INTERFACE_NAME);
+
+    return objectList;
+}
+
+QStringList DataSourceDBusImpl::getPathsByInterface(QString ifaceName)
 {
     QDBusInterface iface(d->m_serviceName,
                          DBUS_ALTERATOR_MANAGER_PATH,
@@ -40,7 +90,38 @@ QStringList DataSourceDbusImpl::getPathByInterface(QString ifaceName)
         return QStringList{};
     }
 
-    QDBusReply<QStringList> reply = iface.call(DBUS_GET_OBJECTS_METHOD_NAME, ifaceName);
+    QDBusReply<QList<QDBusObjectPath>> reply = iface.call(DBUS_GET_OBJECTS_METHOD_NAME, ifaceName);
+
+    if (!reply.isValid())
+    {
+        return QStringList{};
+    }
+
+    QStringList result{};
+
+    for (QDBusObjectPath &path : reply.value())
+    {
+        result.append(path.path());
+    }
+
+    if (result.isEmpty())
+    {
+        return {};
+    }
+
+    return result;
+}
+
+QStringList DataSourceDBusImpl::getObjectsList(QString listMethodName, QString path, QString interfaceName)
+{
+    QDBusInterface iface(d->m_serviceName, path, interfaceName, d->m_dbusConnection);
+
+    if (!iface.isValid())
+    {
+        return {};
+    }
+
+    QDBusReply<QStringList> reply = iface.call(listMethodName);
 
     if (!reply.isValid())
     {
@@ -50,7 +131,7 @@ QStringList DataSourceDbusImpl::getPathByInterface(QString ifaceName)
     return reply.value();
 }
 
-QByteArray DataSourceDbusImpl::getObjectInfo(QString ifaceName, QString path, QString methodName)
+QByteArray DataSourceDBusImpl::getObjectInfo(QString ifaceName, QString path, QString methodName)
 {
     QDBusInterface iface(d->m_serviceName, path, ifaceName, d->m_dbusConnection);
 
