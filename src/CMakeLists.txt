@@ -19,6 +19,9 @@ set(HEADERS
     builders/objectbulderinterface.h
     builders/objectbuilderfactory.h
     builders/localapplicationobjectbuilder.h
+    builders/legacyobjectbuilder.h
+    builders/categoryobjectbuilder.h
+    builders/objectbuilder.h
 
     datasource/datasourceinterface.h
     datasource/datasourcedbusimpl.h
@@ -38,6 +41,9 @@ set(HEADERS
 set(SOURCES
     builders/objectbuilderfactory.cpp
     builders/localapplicationobjectbuilder.cpp
+    builders/legacyobjectbuilder.cpp
+    builders/categoryobjectbuilder.cpp
+    builders/objectbuilder.cpp
 
     datasource/datasourcedbusimpl.cpp
 

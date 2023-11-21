@@ -1,5 +1,5 @@
-#ifndef DATASOURCEDBUSIMPL_H
-#define DATASOURCEDBUSIMPL_H
+#ifndef AOB_DATA_SOURCE_DBUS_IMPL_H
+#define AOB_DATA_SOURCE_DBUS_IMPL_H
 
 #include "datasourceinterface.h"
 
@@ -47,4 +47,4 @@ private:
 
 } // namespace ao_builder
 
-#endif // DATASOURCEDBUSIMPL_H
+#endif // AOB_DATA_SOURCE_DBUS_IMPL_H

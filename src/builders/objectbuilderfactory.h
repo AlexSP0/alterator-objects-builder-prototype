@@ -1,5 +1,5 @@
-#ifndef OBJECTBUILDERFACTORY_H
-#define OBJECTBUILDERFACTORY_H
+#ifndef AOB_OBJECT_BUILDER_FACTORY_H
+#define AOB_OBJECT_BUILDER_FACTORY_H
 
 #include "objectbulderinterface.h"
 
@@ -19,4 +19,4 @@ private:
 
 } // namespace ao_builder
 
-#endif // OBJECTBUILDERFACTORY_H
+#endif // AOB_OBJECT_BUILDER_FACTORY_H

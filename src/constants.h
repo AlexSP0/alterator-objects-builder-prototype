@@ -1,5 +1,5 @@
-#ifndef AB_CONSTANTS_H
-#define AB_CONSTANTS_H
+#ifndef AOB_CONSTANTS_H
+#define AOB_CONSTANTS_H
 
 #include <QString>
 namespace ao_builder

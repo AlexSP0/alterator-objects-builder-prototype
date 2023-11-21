@@ -1,5 +1,5 @@
 #ifndef AOB_CATEGORY_H
-#define AB_CATEGORY_H
+#define AOB_CATEGORY_H
 
 #include <QMap>
 
@@ -21,6 +21,6 @@ public:
 
     void setLocale(QString locale);
 };
-} // namespace objectbuilder
+} // namespace ao_builder
 
 #endif // AB_CATEGORY_H

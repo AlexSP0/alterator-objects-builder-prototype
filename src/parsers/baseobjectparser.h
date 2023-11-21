@@ -1,5 +1,5 @@
-#ifndef BASEOBJECTPARSER_H
-#define BASEOBJECTPARSER_H
+#ifndef AOB_BASEOBJECTPARSER_H
+#define AOB_BASEOBJECTPARSER_H
 
 #include "objectparserinterface.h"
 
