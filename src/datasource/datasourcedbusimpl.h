@@ -17,13 +17,21 @@ public:
 
 public:
     QStringList getLocalAppPaths() override;
-    QStringList getCategoriesList() override;
-    QStringList getLegacyObjectsPaths() override;
-    QStringList getObjectsPath() override;
+    virtual QString getLocalAppInfo(QString path) override;
 
-    QByteArray getObjectInfo(QString ifaceName, QString path, QString methodName) override;
+    QStringList getCategoriesList() override;
+    virtual QString getCategoryInfo(QString path) override;
+
+    QStringList getLegacyObjectsPaths() override;
+    virtual QString getLegacyObjectInfo(QString path) override;
+
+    QStringList getObjectsPath() override;
+    virtual QString getObjectInfo(QString path) override;
 
 private:
+    QByteArray getObjectInfo(QString ifaceName, QString path, QString methodName);
+    QByteArray getObjectInfoByName(QString ifaceName, QString path, QString objectName, QString methodName);
+
     QStringList getPathsByInterface(QString ifaceName);
     QStringList getObjectsList(QString listMethodName, QString path, QString interfaceName);
 

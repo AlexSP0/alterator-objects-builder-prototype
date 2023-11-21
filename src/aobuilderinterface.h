@@ -14,36 +14,15 @@ public:
     virtual ~AOBuilderInterface() = default;
 
 public:
-    /**
-     * @brief getLegacyObjectsPaths Gets list of legacy objects paths on DBus
-     * @return List of legacy objects paths on DBus
-     */
-    virtual QStringList getLegacyObjectsPaths() = 0;
+    virtual std::vector<std::unique_ptr<Object>> buildLocalApps() = 0;
 
-    /**
-     * @brief getLocalAppsPaths Gets list of Local Application objects paths on DBus
-     * @return List of local applications objects paths on DBus
-     */
-    virtual QStringList getLocalAppsPaths() = 0;
+    virtual std::vector<std::unique_ptr<Object>> buildCategories() = 0;
 
-    /**
-     * @brief getCategoriesList Gets list of object categories on DBus
-     * @return List of object categories
-     */
-    virtual QStringList getCategoriesList() = 0;
+    virtual std::vector<std::unique_ptr<Object>> buildLegacyObject() = 0;
 
-    /**
-     * @brief getObjectsPaths Builds a LocalAppObject by getting information from DBus
-     * @return List of objects paths on DBus
-     */
-    virtual QStringList getObjectsPaths() = 0;
+    virtual std::vector<std::unique_ptr<Object>> buildObjects() = 0;
 
-    /**
-     * @brief buildObject
-     * @param path Path to object on the DBus
-     * @return unique_ptr with builded Object or nullptr in case of failure
-     */
-    virtual std::unique_ptr<Object> buildObject(QString path, QString interface) = 0;
+    virtual std::unique_ptr<Object> buildObject(QString info) = 0;
 };
 } // namespace ao_builder
 

@@ -10,11 +10,12 @@ int main(int argc, char *argv[])
     MainWindow w;
 
     ao_builder::AOBuilderImpl b;
-    QStringList applications = b.getLocalAppsPaths();
 
-    QStringList categories = b.getCategoriesList();
+    b.buildLocalApps();
 
-    QStringList legacyObject = b.getLegacyObjectsPaths();
+    b.buildCategories();
+
+    b.buildLegacyObject();
 
     w.show();
     return a.exec();

@@ -37,36 +37,98 @@ AOBuilderImpl::~AOBuilderImpl()
     delete d;
 }
 
-QStringList AOBuilderImpl::getLegacyObjectsPaths()
+std::vector<std::unique_ptr<Object>> AOBuilderImpl::buildLocalApps()
 {
-    return d->m_dataSource->getLegacyObjectsPaths();
+    QStringList appsList = d->m_dataSource->getLocalAppPaths();
+
+    std::vector<std::unique_ptr<Object>> result{};
+
+    for (QString currentApp : appsList)
+    {
+        QString currentAppInfo = d->m_dataSource->getLocalAppInfo(currentApp);
+
+        std::unique_ptr<Object> currentObject = buildObject(currentAppInfo);
+
+        if (currentObject)
+        {
+            result.push_back(std::move(currentObject));
+        }
+    }
+
+    return result;
 }
 
-QStringList AOBuilderImpl::getLocalAppsPaths()
+std::vector<std::unique_ptr<Object>> AOBuilderImpl::buildCategories()
 {
-    return d->m_dataSource->getLocalAppPaths();
+    QStringList catList = d->m_dataSource->getCategoriesList();
+
+    std::vector<std::unique_ptr<Object>> result;
+
+    for (QString currentCategory : catList)
+    {
+        QString currentCatInfo = d->m_dataSource->getCategoryInfo(currentCategory);
+
+        std::unique_ptr<Object> currentObject = buildObject(currentCatInfo);
+
+        if (currentObject)
+        {
+            result.push_back(std::move(currentObject));
+        }
+    }
+
+    return result;
 }
 
-QStringList AOBuilderImpl::getCategoriesList()
+std::vector<std::unique_ptr<Object>> AOBuilderImpl::buildLegacyObject()
 {
-    return d->m_dataSource->getCategoriesList();
+    QStringList legacyObjectsList = d->m_dataSource->getLegacyObjectsPaths();
+
+    std::vector<std::unique_ptr<Object>> result;
+
+    for (QString currentLegacy : legacyObjectsList)
+    {
+        QString currentLegacyInfo = d->m_dataSource->getLegacyObjectInfo(currentLegacy);
+
+        std::unique_ptr<Object> currentObject = buildObject(currentLegacyInfo);
+
+        if (currentObject)
+        {
+            result.push_back(std::move(currentObject));
+        }
+    }
+
+    return result;
 }
 
-QStringList AOBuilderImpl::getObjectsPaths()
+std::vector<std::unique_ptr<Object>> AOBuilderImpl::buildObjects()
 {
-    return d->m_dataSource->getObjectsPath();
+    QStringList objectsList = d->m_dataSource->getObjectsPath();
+
+    std::vector<std::unique_ptr<Object>> result;
+
+    for (QString currentObjectPath : objectsList)
+    {
+        QString currentObjectInfo = d->m_dataSource->getObjectInfo(currentObjectPath);
+
+        std::unique_ptr<Object> currentObject = buildObject(currentObjectInfo);
+
+        if (currentObject)
+        {
+            result.push_back(std::move(currentObject));
+        }
+    }
+
+    return result;
 }
 
-std::unique_ptr<Object> AOBuilderImpl::buildObject(QString path, QString interface)
+std::unique_ptr<Object> AOBuilderImpl::buildObject(QString info)
 {
-    QString objectInfo = d->m_dataSource->getObjectInfo(interface, path, DBUS_OBJECT_METHOD_INFO_DEFAULT_NAME);
-
-    if (objectInfo.isEmpty())
+    if (info.isEmpty())
     {
         return nullptr;
     }
 
-    if (!d->m_parser->parse(objectInfo))
+    if (!d->m_parser->parse(info))
     {
         return nullptr;
     }
@@ -82,4 +144,5 @@ std::unique_ptr<Object> AOBuilderImpl::buildObject(QString path, QString interfa
 
     return objectBuilder->buildObject(d->m_parser.get());
 }
+
 } // namespace ao_builder

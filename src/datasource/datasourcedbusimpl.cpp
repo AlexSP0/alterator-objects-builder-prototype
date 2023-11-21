@@ -46,6 +46,16 @@ QStringList DataSourceDBusImpl::getLocalAppPaths()
     return localAppList;
 }
 
+QString DataSourceDBusImpl::getLocalAppInfo(QString path)
+{
+    QString info = getObjectInfoByName(DBUS_LOCAL_APP_OBJECT_INTERFACE_NAME,
+                                       DBUS_LOCAL_APP_OBJECT_PATH,
+                                       path,
+                                       DBUS_OBJECT_METHOD_INFO_DEFAULT_NAME);
+
+    return info;
+}
+
 QStringList DataSourceDBusImpl::getCategoriesList()
 {
     QStringList mainCatObjectList = getPathsByInterface(DBUS_CATEGORY_OBJECT_INTERFACE_NAME);
@@ -64,6 +74,16 @@ QStringList DataSourceDBusImpl::getCategoriesList()
     return localCatList;
 }
 
+QString DataSourceDBusImpl::getCategoryInfo(QString path)
+{
+    QString catInfo = getObjectInfoByName(DBUS_CATEGORY_OBJECT_INTERFACE_NAME,
+                                          DBUS_CATEGORY_OBJECT_PATH,
+                                          path,
+                                          DBUS_OBJECT_METHOD_INFO_DEFAULT_NAME);
+
+    return catInfo;
+}
+
 QStringList DataSourceDBusImpl::getLegacyObjectsPaths()
 {
     QStringList legacyObjectList = getPathsByInterface(DBUS_LEGACY_OBJECT_INTERFACE_NAME);
@@ -71,11 +91,23 @@ QStringList DataSourceDBusImpl::getLegacyObjectsPaths()
     return legacyObjectList;
 }
 
+QString DataSourceDBusImpl::getLegacyObjectInfo(QString path)
+{
+    QString legacyInfo = getObjectInfo(DBUS_LEGACY_OBJECT_INTERFACE_NAME, path, DBUS_OBJECT_METHOD_INFO_DEFAULT_NAME);
+
+    return legacyInfo;
+}
+
 QStringList DataSourceDBusImpl::getObjectsPath()
 {
     QStringList objectList = getPathsByInterface(DBUS_OBJECT_INTERFACE_NAME);
 
     return objectList;
+}
+
+QString DataSourceDBusImpl::getObjectInfo(QString path)
+{
+    return {};
 }
 
 QStringList DataSourceDBusImpl::getPathsByInterface(QString ifaceName)
@@ -141,6 +173,28 @@ QByteArray DataSourceDBusImpl::getObjectInfo(QString ifaceName, QString path, QS
     }
 
     QDBusReply<QByteArray> reply = iface.call(methodName);
+
+    if (!reply.isValid())
+    {
+        return QByteArray{};
+    }
+
+    return reply.value();
+}
+
+QByteArray DataSourceDBusImpl::getObjectInfoByName(QString ifaceName,
+                                                   QString path,
+                                                   QString objectName,
+                                                   QString methodName)
+{
+    QDBusInterface iface(d->m_serviceName, path, ifaceName, d->m_dbusConnection);
+
+    if (!iface.isValid())
+    {
+        return QByteArray{};
+    }
+
+    QDBusReply<QByteArray> reply = iface.call(methodName, objectName);
 
     if (!reply.isValid())
     {

@@ -15,12 +15,12 @@ public:
 
     // AOBuilderInterface interface
 public:
-    QStringList getLegacyObjectsPaths() override;
-    QStringList getLocalAppsPaths() override;
-    QStringList getCategoriesList() override;
-    QStringList getObjectsPaths() override;
+    std::vector<std::unique_ptr<Object>> buildLocalApps() override;
+    std::vector<std::unique_ptr<Object>> buildCategories() override;
+    std::vector<std::unique_ptr<Object>> buildLegacyObject() override;
+    std::vector<std::unique_ptr<Object>> buildObjects() override;
 
-    std::unique_ptr<Object> buildObject(QString path, QString interface) override;
+    std::unique_ptr<Object> buildObject(QString info) override;
 
 private:
     AOBuilderImplPrivate *d;
