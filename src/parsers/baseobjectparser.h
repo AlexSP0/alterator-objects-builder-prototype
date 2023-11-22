@@ -3,6 +3,8 @@
 
 #include "objectparserinterface.h"
 
+#include <objects/object.h>
+
 namespace ao_builder
 {
 class BaseObjectParser : public ObjectParserInterface

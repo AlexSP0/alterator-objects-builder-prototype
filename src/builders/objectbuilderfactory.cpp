@@ -1,6 +1,8 @@
 
 #include "objectbuilderfactory.h"
+#include "categoryobjectbuilder.h"
 #include "constants.h"
+#include "localapplicationobjectbuilder.h"
 
 namespace ao_builder
 {
@@ -41,11 +43,11 @@ std::unique_ptr<ObjectBuilderInterface> ObjectBuilderFactory::getObjectBuilder(O
 
     if (type == KEY_TYPE_VALUE_FOR_APPLICATION_OBJECT)
     {
-        return nullptr;
+        return std::unique_ptr<ObjectBuilderInterface>(new LocalApplicationObjectBuilder());
     }
     else if (type == KEY_TYPE_VALUE_FOR_CATEGORY_OBJECT)
     {
-        return nullptr;
+        return std::unique_ptr<ObjectBuilderInterface>(new CategoryObjectBuilder());
     }
     else if (type == KEY_TYPE_VALUE_FOR_OBJECT)
     {

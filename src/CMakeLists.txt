@@ -18,6 +18,7 @@ set(HEADERS
 
     builders/objectbulderinterface.h
     builders/objectbuilderfactory.h
+    builders/baseobjectbuilder.h
     builders/localapplicationobjectbuilder.h
     builders/legacyobjectbuilder.h
     builders/categoryobjectbuilder.h
@@ -40,6 +41,7 @@ set(HEADERS
 
 set(SOURCES
     builders/objectbuilderfactory.cpp
+    builders/baseobjectbuilder.cpp
     builders/localapplicationobjectbuilder.cpp
     builders/legacyobjectbuilder.cpp
     builders/categoryobjectbuilder.cpp

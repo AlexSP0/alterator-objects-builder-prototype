@@ -1,11 +1,11 @@
 #ifndef AOB_LEGACY_OBJECT_BUILDER_H
 #define AOB_LEGACY_OBJECT_BUILDER_H
 
-#include "objectbulderinterface.h"
+#include "baseobjectbuilder.h"
 
 namespace ao_builder
 {
-class LegacyObjectBuilder : public ObjectBuilderInterface
+class LegacyObjectBuilder : public BaseObjectBuilder
 {
 public:
     LegacyObjectBuilder();

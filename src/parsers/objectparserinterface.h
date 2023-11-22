@@ -6,6 +6,8 @@
 #include <QString>
 #include <QVariant>
 
+#include <objects/object.h>
+
 namespace ao_builder
 {
 class ObjectParserInterface

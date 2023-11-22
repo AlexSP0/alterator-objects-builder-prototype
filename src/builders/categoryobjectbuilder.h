@@ -1,11 +1,11 @@
 #ifndef AOB_CATEGORY_OBJECT_BUILDER_H
 #define AOB_CATEGORY_OBJECT_BUILDER_H
 
-#include "objectbulderinterface.h"
+#include "baseobjectbuilder.h"
 
 namespace ao_builder
 {
-class CategoryObjectBuilder : public ObjectBuilderInterface
+class CategoryObjectBuilder : public BaseObjectBuilder
 {
 public:
     CategoryObjectBuilder();

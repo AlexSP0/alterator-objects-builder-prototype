@@ -20,8 +20,8 @@ const char *const DBUS_LOCAL_APP_GET_DESKTOP_FILE      = "Info";
 
 //DBus objects paths
 const char *const DBUS_ALTERATOR_MANAGER_PATH = "/ru/basealt/alterator";
-const char *const DBUS_CATEGORY_OBJECT_PATH   = "/ru/basealt/alterator/categories";
-const char *const DBUS_LOCAL_APP_OBJECT_PATH  = "/ru/basealt/alterator/applications";
+const char *const DBUS_CATEGORY_OBJECT_PATH   = "/ru/basealt/alterator/global";
+const char *const DBUS_LOCAL_APP_OBJECT_PATH  = "/ru/basealt/alterator/global";
 
 //Names of DBus interfaces
 const char *const DBUS_MANAGER_INTERFACE_NAME          = "ru.basealt.alterator.manager";
@@ -45,6 +45,9 @@ const char *const ALTERATOR_ENTRY_TYPE_KEY_NAME = "Type";
 const char *const KEY_TYPE_VALUE_FOR_APPLICATION_OBJECT = "Application";
 const char *const KEY_TYPE_VALUE_FOR_CATEGORY_OBJECT    = "Category";
 const char *const KEY_TYPE_VALUE_FOR_OBJECT             = "Object";
+
+//Objects fields names
+const char *const OBJECT_KEY_NAME = "Name";
 
 } // namespace ao_builder
 

@@ -63,7 +63,7 @@ QString BaseObjectParser::getKeyNameWithoutLocale(QString keyName)
 
     if (indexOfOpeningBracket >= indexOfClosingBracket || indexOfOpeningBracket == -1 || indexOfClosingBracket == -1)
     {
-        return keyName.toLower();
+        return keyName;
     }
 
     return keyName.mid(0, indexOfOpeningBracket).toLower();
@@ -107,5 +107,4 @@ QString BaseObjectParser::getValue(QString section, QString key)
 
     return {};
 }
-
 } // namespace ao_builder

@@ -26,6 +26,7 @@ public:
     std::vector<QString> m_mimeTypes{}; //Desktop Entry Sections
     bool isTerminal{false};
 
+    QString m_type{};                    //Alterator Entry Section
     QString m_exec{};                    //Alterator Entry Section
     std::vector<QString> m_interfaces{}; //Alterator Entry Section
 
@@ -33,6 +34,6 @@ public:
     QMap<QString, QString> m_commentLocaleStorage{};     //Traslations for m_displayComment
     QMap<QString, QString> m_keywordsLocaleStorage{};    //Translations for m_displayKeywords
 };
-} // namespace objectbuilder
+} // namespace ao_builder
 
 #endif // AOB_LOCAL_APPLICATION_H

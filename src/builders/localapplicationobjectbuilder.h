@@ -1,17 +1,22 @@
 #ifndef AOB_LOCAL_APPLICATION_OBJECT_BUILDER_H
 #define AOB_LOCAL_APPLICATION_OBJECT_BUILDER_H
 
-#include "objectbulderinterface.h"
+#include "baseobjectbuilder.h"
+#include "objects/localappobject.h"
 
 namespace ao_builder
 {
-class LocalApplicationObjectBuilder : public ObjectBuilderInterface
+class LocalApplicationObjectBuilder : public BaseObjectBuilder
 {
 public:
     LocalApplicationObjectBuilder();
     ~LocalApplicationObjectBuilder();
 
     std::unique_ptr<Object> buildObject(ObjectParserInterface *parser) override;
+
+    bool parseDesktopEntrySection(ObjectParserInterface *parser, LocalAppObject *localApplication);
+
+    bool parseAlteratorEntrySection(ObjectParserInterface *parser, LocalAppObject *localApplication);
 };
 
 } // namespace ao_builder
