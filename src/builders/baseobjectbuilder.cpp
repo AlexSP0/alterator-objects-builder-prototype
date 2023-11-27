@@ -14,11 +14,21 @@ std::unique_ptr<Object> BaseObjectBuilder::buildObject(ObjectParserInterface *pa
 }
 
 bool BaseObjectBuilder::buildFieldWithLocale(ObjectParserInterface *parser,
-                                             ObjectParserInterface::Section &section,
+                                             QString sectionName,
                                              QString entryName,
                                              QString &field,
                                              QMap<QString, QString> &localeStorage)
 {
+    auto sections = parser->getSections();
+
+    auto alteratorEntrySectionIt = sections.find(sectionName);
+    if (alteratorEntrySectionIt == sections.end())
+    {
+        return false;
+    }
+
+    auto section = *alteratorEntrySectionIt;
+
     auto nameIt = section.find(entryName);
 
     if (nameIt == section.end())
@@ -45,18 +55,26 @@ bool BaseObjectBuilder::buildFieldWithLocale(ObjectParserInterface *parser,
     return true;
 }
 
-bool BaseObjectBuilder::buildNames(ObjectParserInterface *parser,
-                                   ObjectParserInterface::Section &section,
-                                   Object *localAppObject)
+bool BaseObjectBuilder::buildNames(ObjectParserInterface *parser, QString sectionName, Object *localAppObject)
 {
-    auto nameIt = section.find(OBJECT_KEY_NAME);
+    auto sections = parser->getSections();
+
+    auto alteratorEntrySectionIt = sections.find(sectionName);
+    if (alteratorEntrySectionIt == sections.end())
+    {
+        return false;
+    }
+
+    auto section = *alteratorEntrySectionIt;
+
+    auto nameIt = section.find(ALTERATOR_ENTRY_OBJECT_KEY_NAME);
 
     if (nameIt == section.end())
     {
         return false;
     }
 
-    QList<ObjectParserInterface::IniFileKey> listOfKeys = section.values(OBJECT_KEY_NAME);
+    QList<ObjectParserInterface::IniFileKey> listOfKeys = section.values(ALTERATOR_ENTRY_OBJECT_KEY_NAME);
 
     QString defaultName = parser->getDefaultValue(listOfKeys);
 

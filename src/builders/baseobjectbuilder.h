@@ -15,12 +15,12 @@ public:
     std::unique_ptr<Object> buildObject(ObjectParserInterface *parser);
 
     bool buildFieldWithLocale(ObjectParserInterface *parser,
-                              ObjectParserInterface::Section &section,
+                              QString sectionName,
                               QString entryName,
                               QString &field,
                               QMap<QString, QString> &localeStorage);
 
-    bool buildNames(ObjectParserInterface *parser, ObjectParserInterface::Section &section, Object *localAppObject);
+    bool buildNames(ObjectParserInterface *parser, QString sectionName, Object *localAppObject);
 
     std::vector<QString> parseValuesFromKey(ObjectParserInterface *parser,
                                             QString section,

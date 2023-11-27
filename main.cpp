@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 
     ao_builder::AOBuilderImpl b;
 
-    b.buildLocalApps();
+    //b.buildLocalApps();
 
     b.buildCategories();
 

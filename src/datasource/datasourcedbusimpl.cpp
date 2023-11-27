@@ -5,6 +5,9 @@
 #include <QDBusInterface>
 #include <QDBusReply>
 
+#include <iostream>
+#include <QDebug>
+
 namespace ao_builder
 {
 class DataSourseDbusImplPrivate
@@ -187,6 +190,8 @@ QByteArray DataSourceDBusImpl::getObjectInfoByName(QString ifaceName,
                                                    QString objectName,
                                                    QString methodName)
 {
+    QString param = QString("%1%2%3").arg("\"").arg(objectName).arg("\"");
+
     QDBusInterface iface(d->m_serviceName, path, ifaceName, d->m_dbusConnection);
 
     if (!iface.isValid())
@@ -194,7 +199,7 @@ QByteArray DataSourceDBusImpl::getObjectInfoByName(QString ifaceName,
         return QByteArray{};
     }
 
-    QDBusReply<QByteArray> reply = iface.call(methodName, objectName);
+    QDBusReply<QByteArray> reply = iface.call(methodName, param);
 
     if (!reply.isValid())
     {
