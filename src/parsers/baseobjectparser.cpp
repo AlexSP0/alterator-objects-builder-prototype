@@ -66,7 +66,7 @@ QString BaseObjectParser::getKeyNameWithoutLocale(QString keyName)
         return keyName;
     }
 
-    return keyName.mid(0, indexOfOpeningBracket).toLower();
+    return keyName.mid(0, indexOfOpeningBracket);
 }
 
 QString BaseObjectParser::getDefaultValue(QList<IniFileKey> iniFileKey)
