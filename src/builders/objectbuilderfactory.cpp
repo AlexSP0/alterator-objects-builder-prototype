@@ -2,6 +2,7 @@
 #include "objectbuilderfactory.h"
 #include "categoryobjectbuilder.h"
 #include "constants.h"
+#include "legacyobjectbuilder.h"
 #include "localapplicationobjectbuilder.h"
 
 namespace ao_builder
@@ -27,7 +28,7 @@ std::unique_ptr<ObjectBuilderInterface> ObjectBuilderFactory::getBuilder(ObjectP
     }
 
     // This is old object, return old object builder
-    return std::unique_ptr<ObjectBuilderInterface>();
+    return std::unique_ptr<ObjectBuilderInterface>(new LegacyObjectBuilder());
 
     return nullptr;
 }

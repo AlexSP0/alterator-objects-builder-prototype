@@ -31,6 +31,7 @@ set(HEADERS
     objects/basicobject.h
     objects/category.h
     objects/localappobject.h
+    objects/legacyobject.h
 
     parsers/objectparserinterface.h
     parsers/baseobjectparser.h
@@ -53,6 +54,7 @@ set(SOURCES
     objects/basicobject.cpp
     objects/category.cpp
     objects/localappobject.cpp
+    objects/legacyobject.cpp
 
     parsers/baseobjectparser.cpp
 

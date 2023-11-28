@@ -123,12 +123,7 @@ std::vector<std::unique_ptr<Object>> AOBuilderImpl::buildObjects()
 
 std::unique_ptr<Object> AOBuilderImpl::buildObject(QString info)
 {
-    if (info.isEmpty())
-    {
-        return nullptr;
-    }
-
-    if (!d->m_parser->parse(info))
+    if (info.isEmpty() || !d->m_parser->parse(info))
     {
         return nullptr;
     }
